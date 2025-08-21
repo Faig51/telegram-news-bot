@@ -1,0 +1,25 @@
+name: Telegram News Bot
+
+on:
+  schedule:
+    - cron: '*/45 * * * *'  # Hər 45 dəqiqədə bir işləsin
+  workflow_dispatch:        # Manual test üçün GitHub-da "Run workflow" düyməsi aktiv olur
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Kodun klonlanması
+        uses: actions/checkout@v3
+
+      - name: Python quraşdırılması
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Asılılıqların qurulması
+        run: pip install -r requirements.txt
+
+      - name: Botun işə salınması
+        run: python news_bot.py
