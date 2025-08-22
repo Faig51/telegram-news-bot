@@ -19,7 +19,14 @@ jobs:
           python-version: '3.10'
 
       - name: Asılılıqların qurulması
-        run: pip install -r requirements.txt
+        run: |
+          echo "Asılılıqlar yüklənir..."
+          pip install -r requirements.txt
 
       - name: Botun işə salınması
-        run: python news_bot.py
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
+        run: |
+          echo "Bot işə düşür..."
+          python news_bot.py
