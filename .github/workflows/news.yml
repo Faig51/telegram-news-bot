@@ -12,11 +12,18 @@ jobs:
     steps:
       - name: Kodun klonlanması
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Bütün commit-ləri və faylları tam şəkildə klonlayır
 
       - name: Python quraşdırılması
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
+
+      - name: Faylların mövcudluğunu yoxla
+        run: |
+          echo "Mövcud fayllar:"
+          ls -la
 
       - name: Asılılıqların qurulması
         run: |
