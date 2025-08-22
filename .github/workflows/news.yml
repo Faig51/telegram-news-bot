@@ -15,15 +15,15 @@ jobs:
         with:
           fetch-depth: 0  # Bütün commit-ləri və faylları tam şəkildə klonlayır
 
+      - name: Faylların siyahısı
+        run: |
+          echo "Workflow zamanı mövcud fayllar:"
+          ls -la
+
       - name: Python quraşdırılması
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-
-      - name: Faylların mövcudluğunu yoxla
-        run: |
-          echo "Mövcud fayllar:"
-          ls -la
 
       - name: Asılılıqların qurulması
         run: |
