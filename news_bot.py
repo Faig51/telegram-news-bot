@@ -31,7 +31,7 @@ def get_news_hash(title):
 
 # Başlıq oxşarlığı funksiyası
 def is_similar(title1, title2):
-    return SequenceMatcher(None, title1.lower(), title2.lower()).ratio() >= SIMILARITY_THRESHOLD
+    return SequenceMatcher(None, title1.lower(), title2.lower()).ratio()>= SIMILARITY_THRESHOLD
 
 # RSS feed-dən xəbərləri çəkən funksiya
 def get_news_from_feed(source_name, url):
@@ -70,16 +70,13 @@ def send_filtered_news():
             is_similar(item['title'], prev['title'])
             for prev in all_news
             if get_news_hash(prev['title']) in sent_hashes
-        ):
+):
             print(f"⚠️ Oxşar xəbər filtr edildi: {item['title']}")
             continue
 
-        # Göndər və yadda saxla
-        print(f"📤 Göndərilir: {item['title']}")
-        bot.send_message(CHAT_ID, item['text'])
+        # Göndərilməyəcək, sadəcə konsola yazılacaq
+        print(f"📤 Göndərilməli idi: {item['title']}")
+        print(item['text'])  # Əlavə olaraq tam mətn konsola yazılır
 
         sent_hashes.add(news_hash)
         time.sleep(1)
-
-# Botu işə sal
-send_filtered_news()
