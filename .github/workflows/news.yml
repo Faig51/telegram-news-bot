@@ -1,9 +1,7 @@
 name: Telegram News Bot
 
 on:
-  schedule:
-    - cron: '*/45 * * * *'  # Hər 45 dəqiqədə bir işləsin
-  workflow_dispatch:        # Manual test üçün GitHub-da "Run workflow" düyməsi aktiv olur
+  workflow_dispatch:  # Yalnız manual test üçün aktivdir
 
 jobs:
   run-bot:
@@ -13,7 +11,7 @@ jobs:
       - name: Kodun klonlanması
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Bütün commit-ləri və faylları tam şəkildə klonlayır
+          fetch-depth: 0
 
       - name: Faylların siyahısı
         run: |
@@ -32,8 +30,8 @@ jobs:
 
       - name: Botun işə salınması
         env:
-          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-          CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN}}
+          CHANNEL_ID: ${{ secrets.CHANNEL_ID}}
         run: |
           echo "Bot işə düşür..."
           python news_bot.py
